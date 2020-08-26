@@ -1,0 +1,94 @@
+<template>
+        <lightning-card>
+            <h3 slot="title">
+                <lightning-icon icon-name="standard:link" size="medium" class="slds-m-right_small"></lightning-icon>
+                Classic URL Generator
+            </h3>
+            
+            <lightning-tabset>
+                <!-- Current Record Generator -->
+                <template if:true={showCurrentRecordTab}>
+                    <lightning-tab label="Current Record" value="Current Record">
+
+                        <!-- Current Record Classic Link -->
+                        <template if:true={recordId}>
+                            <div class="slds-form-element slds-m-around_medium">
+                                <label class="slds-form-element__label">Classic Record Link</label>
+                                <div class="slds-form-element__control slds-grid slds-border_left slds-border_top slds-border_right slds-border_bottom border-round">
+                                    <lightning-button-icon icon-name="utility:copy_to_clipboard"  
+                                                           variant="bare" 
+                                                           alternative-text="Clipboard"
+                                                           onclick={copyToClipboard}
+                                                           class="slds-col slds-p-around_x-small slds-border_right"
+                                                           tooltip="Click to copy link">
+                                    </lightning-button-icon>
+                                    <input type="text" class="slds-input slds-col slds-m-left_x-small clipboard-link-cr" value={currentRecordUrl} readonly>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Info Bar -->
+                        <template if:false={recordId}>
+                            <div class="slds-scoped-notification slds-media slds-media_center slds-scoped-notification_light slds-m-horizontal_medium border-round" role="status">
+                                <div class="slds-media__figure">
+                                    <lightning-icon icon-name="utility:info_alt" alternative-text="Information" size="small"></lightning-icon>
+                                </div>
+                                <div class="slds-media__body">
+                                    <p>Could not generate a classic link. The current page's record Id is unavailable.</p>
+                                </div>
+                             </div>
+                        </template>
+                    </lightning-tab>
+                </template>
+
+                <!-- Input a Record Generator -->
+                <template if:true={showInputRecordTab}>
+                    <lightning-tab label="Input a Record" value="Input a Record">
+
+                        <!-- Input a Record Input Box -->
+                        <div class="slds-m-horizontal_medium slds-m-bottom_medium">
+                            <lightning-input type="text"
+                                             label="Enter a Record Id"
+                                             placeholder="Enter a valid Salesforce Record Id here..." 
+                                             value={inputRecordId}
+                                             onchange={handleInputChange}
+                                             minlength="15" 
+                                             maxlength="18">
+                            </lightning-input>
+                        </div>
+
+                        <!-- Input a Record Classic Link -->
+                        <template if:true={showInputUrl}>
+                            <div class="slds-form-element slds-m-around_medium">
+                                <label class="slds-form-element__label">Classic Record Link</label>
+                                <div class="slds-form-element__control slds-grid slds-border_left slds-border_top slds-border_right slds-border_bottom border-round">
+                                    <lightning-button-icon icon-name="utility:copy_to_clipboard"  
+                                                           variant="bare" 
+                                                           alternative-text="Clipboard"
+                                                           onclick={copyToClipboard}
+                                                           class="slds-col slds-p-around_x-small slds-border_right"
+                                                           tooltip="Click to copy link">
+                                    </lightning-button-icon>
+                                    <input type="text" class="slds-input slds-col slds-m-left_x-small clipboard-link-iar" value={classicUrlInputRecord} readonly>
+                                </div>
+                            </div>
+                        </template>
+
+                        <!-- Generate Link Button for Input a Record -->
+                        <lightning-button label="Generate Link" 
+                                          title="Generate Classic Link" 
+                                          icon-name="utility:magicwand" 
+                                          class="slds-m-around_medium" 
+                                          onclick={generateInputRecordUrl}>
+                        </lightning-button>
+                    </lightning-tab>
+                </template>
+            </lightning-tabset>
+
+            <div slot="footer">
+                <p class="slds-text-body_small">
+                    Generate a classic link to share or copy/paste into the browser address bar
+                </p>
+            </div>
+        </lightning-card>
+</template>

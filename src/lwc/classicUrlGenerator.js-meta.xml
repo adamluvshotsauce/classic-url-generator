@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LightningComponentBundle xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>47.0</apiVersion>
+    <isExposed>true</isExposed>
+    <masterLabel>Classic URL Generator</masterLabel>
+    <targets>
+        <target>lightning__RecordPage</target>
+        <target>lightning__AppPage</target>
+        <target>lightning__HomePage</target>
+        <target>lightning__UtilityBar</target>
+    </targets>
+    <targetConfigs>
+        <targetConfig targets="lightning__RecordPage">
+            <property name="showCurrentRecordTab" label="Show Current Record Tab" description="Displays the Current Record Tab in the component." type="Boolean" default="true"/>
+            <property name="showInputRecordTab" label="Show Input a Record Tab" description="Displays the Input a Record Tab in the component." type="Boolean" default="false"/>
+        </targetConfig>
+        <targetConfig targets="lightning__AppPage,lightning__HomePage,lightning__UtilityBar">
+            <property name="showCurrentRecordTab" label="Show Current Record Tab" description="Displays the Current Record Tab in the component." type="Boolean" default="false"/>
+            <property name="showInputRecordTab" label="Show Input a Record Tab" description="Displays the Input a Record Tab in the component." type="Boolean" default="true"/>
+        </targetConfig>
+    </targetConfigs>
+</LightningComponentBundle>
